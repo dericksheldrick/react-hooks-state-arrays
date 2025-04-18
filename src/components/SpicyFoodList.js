@@ -6,11 +6,26 @@ function SpicyFoodList() {
 
   function handleAddFood() {
     const newFood = getNewRandomSpicyFood();
+    // Any time we need to update an object or array in state, 
+    // we need to make a new object and call setState with the new object.
+
+    const newFoodArray = [...foods, newFood];
+
+    setFoods(newFoodArray)
+
     console.log(newFood);
+
+  }
+  // have added handleClick function that remove the list of food when it is clicked on
+
+  function handleClick(id){
+    const newFoodArray = foods.filter((food) =>
+    food.id !== id);
+    setFoods(newFoodArray);
   }
 
   const foodList = foods.map((food) => (
-    <li key={food.id}>
+    <li key={food.id} onClick={() => handleClick(food.id)}>
       {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
     </li>
   ));
